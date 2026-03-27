@@ -9,15 +9,10 @@ end
 " --- Ruby inline (Logstash ruby filter) ---
 silent! syn include @Ruby syntax/ruby.vim
 
-" code => '...'
-syn region logstashRubyCode start=+\<code\>\s*=>\s*'+ skip=+\\'+ end=+'+ keepend contains=@Ruby containedin=logstashBlock
-" code => "..."
-syn region logstashRubyCode start=+\<code\>\s*=>\s*"+ skip=+\\"+ end=+"+ keepend contains=@Ruby containedin=logstashBlock
-
-" init => '...'
-syn region logstashRubyCode start=+\<init\>\s*=>\s*'+ skip=+\\'+ end=+'+ keepend contains=@Ruby containedin=logstashBlock
-" init => "..."
-syn region logstashRubyCode start=+\<init\>\s*=>\s*"+ skip=+\\"+ end=+"+ keepend contains=@Ruby containedin=logstashBlock
+" code/init => "..."
+syn region logstashRubyCode matchgroup=logstashOperator start=+\<\(code\|init\)\>\s*=>\s*"+ skip=+\\"+ end=+"+ keepend contains=@Ruby transparent containedin=logstashBlock
+" code/init => '...'
+syn region logstashRubyCode matchgroup=logstashOperator start=+\<\(code\|init\)\>\s*=>\s*'+ skip=+\\'+ end=+'+ keepend contains=@Ruby transparent containedin=logstashBlock
 
 
 
