@@ -5,20 +5,18 @@ if exists("b:current_syntax")
   finish
 end
 
-
 " --- Ruby inline (Logstash ruby filter) ---
-" Charge la syntaxe Ruby si dispo
 silent! syn include @Ruby syntax/ruby.vim
 
+" code => '...'
+syn region logstashRubyCode start=+\<code\>\s*=>\s*'+ skip=+\\'+ end=+'+ keepend contains=@Ruby
+" code => "..."
+syn region logstashRubyCode start=+\<code\>\s*=>\s*"+ skip=+\\"+ end=+"+ keepend contains=@Ruby
 
-" Supporte code => '...' ou code => "..."
-syn region logstashRubyCode start=/\v\<code\>\s*=>\s*'/ skip=/\\'/ end=/'/ keepend contains=@Ruby
-syn region logstashRubyCode start=/\v\<code\>\s*=>\s*"/ skip=/\\"/ end=/"/ keepend contains=@Ruby
-
-" Supporte init => '...' ou init => "..."
-syn region logstashRubyCode start=/\v\<init\>\s*=>\s*'/ skip=/\\'/ end=/'/ keepend contains=@Ruby
-syn region logstashRubyCode start=/\v\<init\>\s*=>\s*"/ skip=/\\"/ end=/"/ keepend contains=@Ruby
-
+" init => '...'
+syn region logstashRubyCode start=+\<init\>\s*=>\s*'+ skip=+\\'+ end=+'+ keepend contains=@Ruby
+" init => "..."
+syn region logstashRubyCode start=+\<init\>\s*=>\s*"+ skip=+\\"+ end=+"+ keepend contains=@Ruby
 
 syn match logstashVariableBlock '\v\[[^,"].*\]' contained
 syn match logstashVariableString '\v\[[^,"].*\]' contained
