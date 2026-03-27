@@ -5,18 +5,21 @@ if exists("b:current_syntax")
   finish
 end
 
+
 " --- Ruby inline (Logstash ruby filter) ---
 silent! syn include @Ruby syntax/ruby.vim
 
 " code => '...'
-syn region logstashRubyCode start=+\<code\>\s*=>\s*'+ skip=+\\'+ end=+'+ keepend contains=@Ruby
+syn region logstashRubyCode start=+\<code\>\s*=>\s*'+ skip=+\\'+ end=+'+ keepend contains=@Ruby containedin=logstashBlock
 " code => "..."
-syn region logstashRubyCode start=+\<code\>\s*=>\s*"+ skip=+\\"+ end=+"+ keepend contains=@Ruby
+syn region logstashRubyCode start=+\<code\>\s*=>\s*"+ skip=+\\"+ end=+"+ keepend contains=@Ruby containedin=logstashBlock
 
 " init => '...'
-syn region logstashRubyCode start=+\<init\>\s*=>\s*'+ skip=+\\'+ end=+'+ keepend contains=@Ruby
+syn region logstashRubyCode start=+\<init\>\s*=>\s*'+ skip=+\\'+ end=+'+ keepend contains=@Ruby containedin=logstashBlock
 " init => "..."
-syn region logstashRubyCode start=+\<init\>\s*=>\s*"+ skip=+\\"+ end=+"+ keepend contains=@Ruby
+syn region logstashRubyCode start=+\<init\>\s*=>\s*"+ skip=+\\"+ end=+"+ keepend contains=@Ruby containedin=logstashBlock
+
+
 
 syn match logstashVariableBlock '\v\[[^,"].*\]' contained
 syn match logstashVariableString '\v\[[^,"].*\]' contained
@@ -43,7 +46,7 @@ syn keyword logstashBoolean false contained
 
 syn match logstashNumber '\v\d\+' contained
 
-syn region logstashBlock start=+{+ end=+}+ contains=logstashBlock,logstashComment,logstashPlugin,logstashVariableBlock,logstashString,logstashOperator,logstashBoolean,logstashNumber,logstashConditional,logstashBraces
+syn region logstashBlock start=+{+ end=+}+ contains=logstashBlock,logstashComment,logstashPlugin,logstashVariableBlock,logstashString,logstashOperator,logstashBoolean,logstashNumber,logstashConditional,logstashBraces,logstashRubyCode
 syn region logstashString start=+"+ end=+"+ skip=+\\\\\|\\"+ contains=logstashFormat
 syn region logstashString start=+'+ end=+'+ skip=+\\\\\|\\'+ contains=logstashFormat
 syn region logstashVariableBlock start=/\v\[/ skip=/\v\\./ end=/\v\]/ contains=logstashString
