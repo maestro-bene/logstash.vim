@@ -12,7 +12,7 @@ Or using Lazy in Neovim:
 
 ```
 return {
-	"robbles/logstash.vim",
+	"maestro-bene/logstash.vim",
 	filetype = "logstash",
 }
 ```
